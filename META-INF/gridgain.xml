@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <description>Gridgain Spring GAR descriptor.</description>
+ 
+    <!--
+    List of task class names to deploy.
+    -->
+    <util:list id="tasks">
+		<value>com.topgether.cbgrid.task.ComputeNumTask</value>
+		<value>com.topgether.cbgrid.task.SampleComputeNumTask</value>
+		<value>com.topgether.cbgrid.task.PortableComputeNumTask</value>
+		<value>com.topgether.cbgrid.task.MapComputeNumTask</value>
+    </util:list>
+</beans>
