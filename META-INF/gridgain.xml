@@ -9,6 +9,13 @@
     <!--
     List of task class names to deploy.
     -->
+    <!-- User version. -->
+    <bean id="userVersion" class="java.lang.String">
+    	<constructor-arg value="#{cbVersion.version}" type="String"/>
+    </bean>
+    
+    <bean id="cbVersion" class="com.topgether.base.CbVersion"/>
+    
     <util:list id="tasks">
 		<value>com.topgether.cbgrid.task.ComputeNumTask</value>
 		<value>com.topgether.cbgrid.task.SampleComputeNumTask</value>

@@ -10,6 +10,7 @@ import org.gridgain.grid.cache.GridCache;
 import org.gridgain.grid.cache.GridCacheEntry;
 import org.gridgain.grid.compute.GridComputeJobResult;
 import org.gridgain.grid.compute.GridComputeTaskName;
+import org.gridgain.grid.util.GridClassLoaderCache;
 
 import com.topgether.base.CbJob;
 import com.topgether.base.ICbCall;
@@ -36,7 +37,9 @@ public class SampleComputeNumTask extends CGridCallTask<String, Long, Integer[]>
 	@Override
 	public Collection<CbJob<Long, Integer[]>> splitJob(Serializable... args) throws CJobExcuteException {
 		Collection<CbJob<Long, Integer[]>> list = new ArrayList<CbJob<Long, Integer[]>>();
+		GridClassLoaderCache.printMemoryStats();
 		loadCache(args);
+		GridClassLoaderCache.printMemoryStats();
 		GridCache<Integer, Integer[]> cache = grid.cache("share-hqfx");
 		for (GridCacheEntry<Integer, Integer[]> entry : cache.entrySet()) {
 			list.add(new CbJob<Long, Integer[]>(entry.getKey(), new MyCall(), entry.getValue()));

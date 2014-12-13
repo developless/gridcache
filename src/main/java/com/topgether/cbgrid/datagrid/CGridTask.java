@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import org.gridgain.grid.Grid;
 import org.gridgain.grid.GridException;
@@ -14,6 +15,7 @@ import org.gridgain.grid.compute.GridComputeTaskSession;
 import org.gridgain.grid.compute.GridComputeTaskSplitAdapter;
 import org.gridgain.grid.logger.GridLogger;
 import org.gridgain.grid.resources.GridInstanceResource;
+import org.gridgain.grid.resources.GridLocalNodeIdResource;
 import org.gridgain.grid.resources.GridLoggerResource;
 import org.gridgain.grid.resources.GridTaskSessionResource;
 import org.jetbrains.annotations.Nullable;
@@ -37,6 +39,9 @@ public abstract class CGridTask<R, T, P> extends GridComputeTaskSplitAdapter<Ser
 	
 	@GridInstanceResource
 	protected Grid grid;
+	
+	@GridLocalNodeIdResource
+	protected UUID locNodeId;
 	
 	@GridTaskSessionResource
 	protected GridComputeTaskSession taskSession;

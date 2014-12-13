@@ -18,25 +18,35 @@
     </path>
 
     <!-- MODULES -->
-    <target name="compile" description="Compile baseline module">
-        <delete dir="${basedir}/target/baseline"/>
-        <mkdir dir="${basedir}/target/baseline"/>
-        <javac destdir="${basedir}/target/baseline" encoding="utf-8" source="1.7" target="1.7"
+    <target name="compile" depends="patch" description="Compile baseline module">
+        <delete dir="${basedir}/target/gridgar"/>
+        <mkdir dir="${basedir}/target/gridgar"/>
+        <javac destdir="${basedir}/target/gridgar" encoding="utf-8" source="1.7" target="1.7"
                includeantruntime="false" debug="true">
             <src path="${basedir}/src/main/java" />
+            <classpath refid="baseline.dep" />
+        </javac>
+    </target>
+	
+	<!-- MODULES -->
+    <target name="patch" description="Compile patch module">
+        <delete dir="${basedir}/target/patch"/>
+        <mkdir dir="${basedir}/target/patch"/>
+        <javac destdir="${basedir}/target/patch" encoding="utf-8" source="1.7" target="1.7"
+               includeantruntime="false" debug="true">
+            <src path="${basedir}/src/patch/java" />
             <classpath refid="baseline.dep" />
         </javac>
     </target>
 
     <target name="gar" depends="compile" description="Package distribution as gar">
         <taskdef name="gar" classname="${gar.class}" classpathref="baseline.dep"/>
-        <gar destfile="${dist.dir}/${project.name}.gar" descrdir="${basedir}/META-INF" basedir="${basedir}/target/baseline"/>
+        <gar destfile="${dist.dir}/${project.name}.gar" descrdir="${basedir}/META-INF" basedir="${basedir}/target/gridgar"/>
     </target>
 
     <target name="deploy" depends="gar">
     	<delete dir="${gridgain.home}/work/deployment/file/"/>
-    	<delete dir="${gridgain.home}/work/log"/>
-    	<delete dir="${gridgain.home}/tmp/grid"/>
+    	<delete dir="${gridgain.home}/tmp"/>
         <copy file="${dist.dir}/${project.name}.gar" todir="${gridgain.home}/work/deployment/file"/>
     </target>
 	

@@ -89,7 +89,6 @@ public class RestServer {
         cfg.setDiscoverySpi(discoSpi);
         cfg.setCacheConfiguration(cacheCfg);
         cfg.setDeploymentMode(GridDeploymentMode.CONTINUOUS);
-
         return cfg;
     }
     
