@@ -11,10 +11,8 @@
     -->
     <!-- User version. -->
     <bean id="userVersion" class="java.lang.String">
-    	<constructor-arg value="#{cbVersion.version}" type="String"/>
+    	<constructor-arg value="#{com.topgether.base.CbVersion.version}" type="String"/>
     </bean>
-    
-    <bean id="cbVersion" class="com.topgether.base.CbVersion"/>
     
     <util:list id="tasks">
 		<value>com.topgether.cbgrid.task.ComputeNumTask</value>
