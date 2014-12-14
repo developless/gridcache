@@ -2088,18 +2088,14 @@ public class GridTcpDiscoverySpi extends GridSpiAdapter implements GridDiscovery
         InetAddress addr = resolved.getAddress();
 
         assert addr != null;
-        
-        System.out.println("Address:"+sockAddr.getHostName()+",port:"+resolved.getPort());
 
-        Socket sock = new Socket(sockAddr.getHostName(), resolved.getPort());
-        
-        sock.setSoTimeout((int)sockTimeout);
+        Socket sock = new Socket();
 
-//        sock.bind(new InetSocketAddress(locHost, 0));
-//
-//        sock.setTcpNoDelay(true);
-//        
-//        sock.connect(resolved, (int)sockTimeout);
+        sock.bind(new InetSocketAddress(locHost, 0));
+
+        sock.setTcpNoDelay(true);
+
+        sock.connect(resolved, (int)sockTimeout);
 
         writeToSocket(sock, U.GG_HEADER);
 
@@ -5080,7 +5076,7 @@ public class GridTcpDiscoverySpi extends GridSpiAdapter implements GridDiscovery
             for (port = locPort; port < locPort + locPortRange; port++) {
                 try {
                     srvrSock = new ServerSocket(port, 0, locHost);
-                    System.out.println("Server Address:"+locHost.getHostName()+",Port:"+port);
+
                     break;
                 }
                 catch (IOException e) {
@@ -5106,7 +5102,7 @@ public class GridTcpDiscoverySpi extends GridSpiAdapter implements GridDiscovery
             try {
                 while (!isInterrupted()) {
                     Socket sock = srvrSock.accept();
-                    System.out.println("accept Address:"+locHost.getHostName()+",Port:"+port);
+
                     long tstamp = U.currentTimeMillis();
 
                     if (log.isDebugEnabled())
